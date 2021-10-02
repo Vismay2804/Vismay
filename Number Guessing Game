@@ -1,0 +1,40 @@
+//this program generates a random number, and let the user guess the number choosen and stating how many attempts were done for the same.
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+int main()
+{
+int n,h,g=1;
+srand(time(0));
+n=rand()%100+1;
+//printf("%d",n);
+
+do
+{   
+    printf("\nEnter the Number=");
+    scanf("%d",&h);
+    if (h>n)
+    {
+        printf("Lower Number Please!\n");
+    }
+    else if (h<n)
+    {
+      printf("Higher Number Please!\n");
+
+    }
+    else 
+    {
+        printf("Congratulations!!!\nU guessed the correct number in %d attempt(s)",g);
+    }
+    g++;
+     
+} while (h!=n);
+
+
+
+return 0;
+}
+
+
