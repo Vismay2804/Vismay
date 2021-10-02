@@ -1,0 +1,92 @@
+// This is the code for Automatic Solar Tracker (Minor Project). To be used in Arduino IDE.
+
+#include <Servo.h>
+//defining Servos
+Servo servohori;
+int servoh = 0;
+int servohLimitHigh = 160;
+int servo hLimitLow = 20;
+Servo servoverti;
+int servo v = 0;
+int servovLimitHigh = 160;
+int servovLimitLow = 20;
+//Assigning LDRs
+int ldrtopl = 2; //top left LDR green
+int ldrtopr = 1; //top right LDR yellow
+void setup () {
+servohori.attach(10);
+servohori.write(0);
+servoverti.attach(9);
+servoverti.write(0);
+delay(500); }
+void loop() {
+servoh = servohori.read();
+servov = servoverti.read();
+ //capturing analog values of each LDR
+ int topl = analogRead(ldrtopl);
+ int topr = analogRead(ldrtopr);
+ int botl = analogRead(ldrbotl);
+22
+ int botr = analogRead(ldrbotr);
+ // calculating average
+ int avgtop = (topl + topr) / 2; //average of top LDRs
+ int avgbot = (botl + botr) / 2; //average of bottom LDRs
+ int avgleft = (topl + botl) / 2; //average of left LDRs
+ int avgright = (topr + botr) / 2; //average of right LDRs
+ if (avgtop<avgbot)
+ {
+Servo verti.write(servov +1);
+ if (servov>servovLimitHigh)
+ {
+servov = servovLimitHigh;
+ }
+delay(10);
+ }
+ else if (avgbot<avgtop)
+ {
+Servo verti.write(servov -1);
+ if (servov<servovLimitLow)
+ {
+Servov = servovLimitLow;
+ }
+Delay (10);
+ }
+ else
+ {
+servoverti. write(servov);
+ }
+ if (avglef t>avgright)
+ {
+23
+servohori. write(servoh +1);
+ if (servoh>servohLimitHigh)
+
+{
+Servoh
+= servohLimitHigh;
+
+}
+Delay (10);
+
+}
+ else if (avgright>avgleft)
+
+{
+servohori.write(servoh
+-1);
+ if (servoh<servohLimitLow)
+
+{
+servoh = servohLimitLow;
+
+}
+delay(10);
+
+}
+ else
+
+{
+servohori.write(servoh);
+
+}
+delay(50); }
